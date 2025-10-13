@@ -104,3 +104,12 @@ void	p_print_usr_output2(char const *format, ...);
 ## Various printing functions
 
 Penelope also offers various printing functions.
+
+This prints the bits of a uint8_t
+```c
+void	p_print_bits_uint8(t_penelope_log_level log_level, uint8_t byte, char const *description, bool print_value);
+```
+This prints the bits of a uint32_t
+```c
+void	p_print_bits_uint32(t_penelope_log_level log_level, uint32_t value, bool print_value, char const *description, bool space_each_byte);
+```
