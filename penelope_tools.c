@@ -17,7 +17,8 @@ void	p_print_bits_uint8(t_penelope_log_level log_level, uint8_t byte, char const
  */
 void	p_print_bits_uint32(t_penelope_log_level log_level, uint32_t value, bool print_value, char const *description, bool space_each_byte)
 {
-	p_print_level(log_level, "%s0x%08x = 0b", description, value);
+	if (print_value == true)
+		p_print_level(log_level, "%s0x%08x = 0b", description, value);
 	for (int i = 31; i >= 0; i--)
 	{
 		p_print_level(log_level, "%d", (value >> i) & 0b1);
