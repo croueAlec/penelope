@@ -10,6 +10,7 @@ Clone the repo in your library directory in your C repository.
 PENELOPE_DIR = $(LIBS_DIR)/penelope
 
 PENELOPE = $(PENELOPE_DIR)/penelope.a
+P_LOG_LEVEL=P_LOG_DEFAULT
 
 LIB :=	$(PENELOPE)
 
@@ -20,11 +21,18 @@ INCLUDES := ... \
 ...
 
 $(PENELOPE):
-	@make -C $(PENELOPE_DIR)
+	@make $(LOG_LEVEL) -C $(PENELOPE_DIR)
 
 
 $(NAME): $(PENELOPE) $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES_FLAGS) -o $@
+```
+
+Add the relevant log_level rules to your Makefile like so :
+
+```make
+debug: fclean fcleanlib
+	@$(MAKE) LOG_LEVEL=debug --no-print-directory
 ```
 
 ## Function usage
