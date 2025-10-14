@@ -1,7 +1,10 @@
 # Penelope; the debugging library
 made by acroue
 
-The current log_level can be changed using the `P_LOG_LEVEL` define in [penelope.h](./penelope.h).
+The current log_level can be changed using the `LOG_VALUE` define at compilation like so :
+```sh
+cc -DLOG_VALUE=P_LOG_DEBUG file.c -o program
+```
 
 ## Using the penelope lib
 Clone the repo in your library directory in your C repository and implement the contents of [Makefile.template](./Makefile.template) in your current Makefile
