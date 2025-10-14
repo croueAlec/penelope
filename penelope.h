@@ -69,4 +69,6 @@ void	p_print_trace(char const *format, ...);
 void	p_print_usr_output1(char const *format, ...);
 void	p_print_usr_output2(char const *format, ...);
 
+bool	level_verification(t_penelope_log_level log_level);
+
 #endif
