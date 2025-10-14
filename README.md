@@ -114,6 +114,8 @@ void	p_print_usr_output2(char const *format, ...);
 
 Penelope also offers various printing functions.
 
+
+#### Bits printing
 Prints the bits of a uint8_t value.
 ```c
 void	p_print_bits_uint8(t_penelope_log_level log_level, uint8_t byte, char const *description, bool print_value);
@@ -124,6 +126,7 @@ Prints the bits of a uint32_t value.
 void	p_print_bits_uint32(t_penelope_log_level log_level, uint32_t value, bool print_value, char const *description, bool space_each_byte);
 ```
 
+#### Level_verification
 Returns true or false depending on the passed log_level. Useful for when you want to use a specific printing function while retaining the log_level system.
 ```c
 bool	level_verification(t_penelope_log_level log_level);
