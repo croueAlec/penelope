@@ -1,28 +1,31 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/02/12 18:40:23 by acroue           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#                                      ___               __
+#                                     / _ \___ ___  ___ / /__  ___  ___
+#                                    / ___/ -_) _ \/ -_) / _ \/ _ \/ -_)
+#                                   /_/   \__/_//_/\__/_/\___/ .__/\__/
+#                                   by: acroue              /_/
 
 SRCS =	penelope_tools.c \
 		penelope.c
 
+# Compilation
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+LOG_LVL=P_LOG_DEFAULT
+CFLAGS = -Wall -Wextra -Werror -g3 -DP_LOG_LEVEL=$(LOG_LVL)
+
+# Objs
+OBJDIR = objs
 OBJS = $(SRCS:.c=.o)
+OBJS := $(addprefix $(OBJDIR)/, $(OBJS))
+
+# Info
 NAME = penelope.a
-RM = rm -f
+RM = rm -rf
 
-all: ${NAME}
+all: fclean ${NAME}
 
-.c.o:
-	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@${RM} ${OBJS}
@@ -34,3 +37,21 @@ re: fclean all
 
 ${NAME} : ${OBJS}
 	@ar rcs ${NAME} ${OBJS}
+
+fatal:
+	$(MAKE) LOG_LVL=P_LOG_FATAL
+
+error:
+	$(MAKE) LOG_LVL=P_LOG_ERROR
+
+default:
+	$(MAKE) LOG_LVL=P_LOG_DEFAULT
+
+info:
+	$(MAKE) LOG_LVL=P_LOG_INFO
+
+debug:
+	$(MAKE) LOG_LVL=P_LOG_DEBUG
+
+trace:
+	$(MAKE) LOG_LVL=P_LOG_TRACE
