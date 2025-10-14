@@ -31,22 +31,14 @@ static void	penelope_print_level(t_penelope_log_level log_level, char const *for
 
 
 	case P_LOG_FATAL:
-		penelope_vdprintf(PENELOPE_ERROR_OUTPUT, format, args, log_level);
-		break;
 	case P_LOG_ERROR:
 		penelope_vdprintf(PENELOPE_ERROR_OUTPUT, format, args, log_level);
 		break;
 
 
 	case P_LOG_DEFAULT:
-		penelope_vdprintf(PENELOPE_LOG_OUTPUT, format, args, log_level);
-		break;
 	case P_LOG_INFO:
-		penelope_vdprintf(PENELOPE_LOG_OUTPUT, format, args, log_level);
-		break;
 	case P_LOG_DEBUG:
-		penelope_vdprintf(PENELOPE_LOG_OUTPUT, format, args, log_level);
-		break;
 	case P_LOG_TRACE:
 		penelope_vdprintf(PENELOPE_LOG_OUTPUT, format, args, log_level);
 		break;
