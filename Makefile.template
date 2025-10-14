@@ -1,0 +1,49 @@
+SRCS =	file.c
+
+# Compilation
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3
+
+# Objs
+OBJDIR = objs
+OBJS = $(SRCS:.c=.o)
+OBJS := $(addprefix $(OBJDIR)/, $(OBJS))
+
+
+###				IMPORTANT BLOCK
+# Libs
+LIBS_DIR = libs/
+
+PENELOPE_DIR = $(LIBS_DIR)/penelope
+PENELOPE = $(PENELOPE_DIR)/penelope.a
+LOG_VALUE=P_LOG_DEFAULT
+LOG_DEFINE=-DLOG_LEVEL=$(LOG_VALUE)
+
+LIB :=	$(PENELOPE)
+###				END OF IMPORTANT BLOCK
+
+# Info
+NAME = penelope.a
+RM = rm -rf
+
+all: ${NAME}
+
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) $(LOG_DEFINE) -c $< -o $@ #
+					# add the LOG_DEFINE to your compilation
+
+clean:
+	@${RM} ${OBJDIR}
+
+fclean: clean
+	@${RM} ${NAME}
+
+re: fclean all
+
+debug: fclean
+	@$(MAKE) LOG_VALUE=P_LOG_DEBUG $(LIB_FLAGS)
+# use this as a template for a specific log_level compilation
+
+trace: fclean
+	@$(MAKE) LOG_VALUE=P_LOG_TRACE $(LIB_FLAGS)

@@ -4,35 +4,12 @@ made by acroue
 The current log_level can be changed using the `P_LOG_LEVEL` define in [penelope.h](./penelope.h).
 
 ## Using the penelope lib
-Clone the repo in your library directory in your C repository.
+Clone the repo in your library directory in your C repository and implement the contents of [Makefile.template](./Makefile.template) in your current Makefile
 
-```make
-PENELOPE_DIR = $(LIBS_DIR)/penelope
+Add the P_LOG_LEVEL global variable to your main.c file :
 
-PENELOPE = $(PENELOPE_DIR)/penelope.a
-P_LOG_LEVEL=P_LOG_DEFAULT
-
-LIB :=	$(PENELOPE)
-
-INCLUDES := ... \
-			$(PENELOPE_DIR) \
-			...
-
-...
-
-$(PENELOPE):
-	@make $(LOG_LEVEL) -C $(PENELOPE_DIR)
-
-
-$(NAME): $(PENELOPE) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES_FLAGS) -o $@
-```
-
-Add the relevant log_level rules to your Makefile like so :
-
-```make
-debug: fclean fcleanlib
-	@$(MAKE) LOG_LEVEL=debug --no-print-directory
+```c
+t_penelope_log_level	P_LOG_LEVEL = LOG_LEVEL;
 ```
 
 ## Function usage
