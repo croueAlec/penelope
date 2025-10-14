@@ -25,10 +25,10 @@ all: fclean ${NAME}
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@${RM} ${OBJS}
+	@${RM} ${OBJDIR}
 
 fclean: clean
 	@${RM} ${NAME}
@@ -39,19 +39,19 @@ ${NAME} : ${OBJS}
 	@ar rcs ${NAME} ${OBJS}
 
 fatal:
-	$(MAKE) LOG_LVL=P_LOG_FATAL
+	@$(MAKE) LOG_LVL=P_LOG_FATAL --no-print-directory
 
 error:
-	$(MAKE) LOG_LVL=P_LOG_ERROR
+	@$(MAKE) LOG_LVL=P_LOG_ERROR --no-print-directory
 
 default:
-	$(MAKE) LOG_LVL=P_LOG_DEFAULT
+	@$(MAKE) LOG_LVL=P_LOG_DEFAULT --no-print-directory
 
 info:
-	$(MAKE) LOG_LVL=P_LOG_INFO
+	@$(MAKE) LOG_LVL=P_LOG_INFO --no-print-directory
 
 debug:
-	$(MAKE) LOG_LVL=P_LOG_DEBUG
+	@$(MAKE) LOG_LVL=P_LOG_DEBUG --no-print-directory
 
 trace:
-	$(MAKE) LOG_LVL=P_LOG_TRACE
+	@$(MAKE) LOG_LVL=P_LOG_TRACE --no-print-directory
