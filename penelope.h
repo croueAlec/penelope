@@ -24,9 +24,19 @@
 # define PENELOPE_LOG_USR_OUTPUT1 STDOUT_FILENO
 #endif
 
+#ifndef ENABLE_USR_OUTPUT1
+// Toggling of USR_OUTPUT1
+# define ENABLE_USR_OUTPUT1 true
+#endif
+
 #ifndef PENELOPE_LOG_USR_OUTPUT2
 // Default log output for USR_OUTPUT1 in the penelope debugging library
 # define PENELOPE_LOG_USR_OUTPUT2 STDERR_FILENO
+#endif
+
+#ifndef ENABLE_USR_OUTPUT2
+// Toggling of USR_OUTPUT2
+# define ENABLE_USR_OUTPUT2 true
 #endif
 
 typedef enum	e_penelope_log_level

@@ -171,3 +171,27 @@ void	p_print_usr_output2(char const *format, ...)
 
 	va_end(args);
 }
+
+/**
+ * @brief Returns True or False depending on the log_level argument when compared with P_LOG_LEVEL.
+ */
+bool	level_verification(t_penelope_log_level log_level)
+{
+	if (P_LOG_LEVEL == P_LOG_NONE || log_level == P_LOG_NONE)
+		return (false);
+
+	if (log_level == P_LOG_USR_OUTPUT1 || log_level == P_LOG_USR_OUTPUT2)
+	{
+		if (log_level == P_LOG_USR_OUTPUT1 && ENABLE_USR_OUTPUT1 == true)
+			return (true);
+		else if (log_level == P_LOG_USR_OUTPUT2 && ENABLE_USR_OUTPUT2 == true)
+			return (true);
+		else
+			return (false);
+	}
+
+	if (log_level <= P_LOG_LEVEL)
+		return (true);
+	else
+		return (false);
+}
