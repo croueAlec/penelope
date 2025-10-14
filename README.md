@@ -3,6 +3,32 @@ made by acroue
 
 The current log_level can be changed using the `P_LOG_LEVEL` define in [penelope.h](./penelope.h).
 
+## Using the penelope lib
+Clone the repo in your library directory in your C repository.
+
+```make
+PENELOPE_DIR = $(LIBS_DIR)/penelope
+
+PENELOPE = $(PENELOPE_DIR)/penelope.a
+
+LIB :=	$(PENELOPE)
+
+INCLUDES := ... \
+			$(PENELOPE_DIR) \
+			...
+
+...
+
+$(PENELOPE):
+	@make -C $(PENELOPE_DIR)
+
+
+$(NAME): $(PENELOPE) $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES_FLAGS) -o $@
+```
+
+## Function usage
+
 The main usage of this lib is the `print_level` function.\
 It implements a variation of the standard log levels :
 1. NONE - [**P_LOG_NONE**]	>	Will not print anything. It has no associated function.
