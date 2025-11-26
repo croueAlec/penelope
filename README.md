@@ -1,10 +1,7 @@
 # Penelope; the debugging library
 made by acroue
 
-The current log_level can be changed using the `LOG_VALUE` define at compilation like so :
-```sh
-cc -DLOG_VALUE=P_LOG_DEBUG file.c -o program
-```
+The penelope debugging library is a tool meant to improve the displaying of errors, information and output of your C program.
 
 ## Using the penelope lib
 Clone the repo in your library directory in your C repository and implement the contents of [Makefile.template](./Makefile.template) in your current Makefile
@@ -15,9 +12,14 @@ Add the P_LOG_LEVEL global variable to your main.c file :
 t_penelope_log_level	P_LOG_LEVEL = LOG_LEVEL;
 ```
 
+Include the penelope header file in your program
+```c
+#include "penelope.h"
+```
+
 ## Function usage
 
-The main usage of this lib is the `print_level` function.\
+The main usage of this lib is the `print_level` function family.\
 It implements a variation of the standard log levels :
 1. NONE - [**P_LOG_NONE**]	>	Will not print anything. It has no associated function.
 1. Fatal - [**P_LOG_FATAL**]	>	Prints only **Fatal Errors** that cause the program to stop when they happen.
@@ -45,10 +47,16 @@ The default error log output can be changed in [penelope.h](./penelope.h) as wel
 
 These log levels are cumulative, which means level **DEFAULT** will print **ERROR**s as well as **FATAL**.
 
-You can use either the mother function `p_print_level()` or each of the sister function.
+### p_print_level();
+
+You can use either the mother function `p_print_level()` or each of the **LOG_LEVEL**-specific **macros**.
 ```c
 void	p_print_level(t_penelope_log_level log_level, char const *format, ...);
 ```
+
+### Penelope macros
+From 2.0 and onwards, the **LOG_LEVEL** specific functions are implemented as **macros** expanded upon compilation. This prevents functions that do not match the current **LOG_LEVEL** to be called at runtime. \
+They are prototyped and work as such :
 
 #### Fatal
 ```c
@@ -80,12 +88,14 @@ void	p_print_debug(char const *format, ...); // Will always print as DEBUG
 void	p_print_trace(char const *format, ...); // Will always print as TRACE
 ```
 
+### LOG_USR_OUTPUT
+
 There are also two more log levels that are independent from the log_level system above :
 1. **P_LOG_USR_OUTPUT1** < Prints on **STDOUT by default**
 2. **P_LOG_USR_OUTPUT2** < Prints on **STDERR by default**
 
 These two log_levels don't have a specific use. By default, they will print but you can disable them using their respective defines.\
-Just like with the default log_level system, you can change the output of each of these logs independently in the `penelope.h` header file :
+Just like with the default log_level system, you can change the output of each of these logs independently in the [penelope.h](./penelope.h) header file :
 
 ```c
 #ifndef PENELOPE_LOG_USR_OUTPUT1
@@ -126,7 +136,7 @@ void	p_print_usr_output2(char const *format, ...);
 
 ## Various printing functions
 
-Penelope also offers various printing functions.
+Penelope also offers various printing functions and utils.
 
 
 #### Bits printing
